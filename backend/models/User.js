@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
         required: true,
@@ -10,7 +15,35 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    birthdate: {
+        type: Date
+    },
+    gender: {
+        type: String,
+        enum: ['male', 'female', 'other']
+    },
+    location: {
+        type: String
+    },
+    religion: {
+        type: String
+    },
+    subscription_type: {
+        type: String,
+        enum: ['monthly', 'yearly']
+    },
+    subscription_status: {
+        type: String,
+        enum: ['active', 'inactive']
+    },
+    account_creation_date: {
+        type: Date,
+        default: Date.now
+    },
+    account_termination_date: {
+        type: Date
+    }  
 });
 
 // Hash password before saving
