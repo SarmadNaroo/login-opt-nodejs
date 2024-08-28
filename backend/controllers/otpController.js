@@ -16,7 +16,7 @@ exports.generateOtp = async (req, res) => {
         });
         await newOtp.save();
 
-        res.status(201).json({ message: 'OTP generated successfully' });
+        res.status(201).json({ success: true });
     } catch (err) {
         res.status(500).json({ message: 'Server error', error: err.message });
     }
