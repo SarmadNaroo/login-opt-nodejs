@@ -18,7 +18,7 @@ app.use('/api/logininfo', loginInfoRoutes);
 app.use('/api/otp', otpRoutes); 
 
 // Connect to MongoDB
-mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(config.mongoURI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
