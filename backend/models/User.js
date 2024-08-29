@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
     religion: {
         type: String
     },
+    mood: {
+        type: String
+    },
     subscription_type: {
         type: String,
         enum: ['monthly', 'yearly']
