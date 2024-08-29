@@ -24,3 +24,31 @@ exports.createUserPost = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error', error: err.message });
     }
 };
+
+exports.getPosts = async (req, res) => {
+    const { mood, start_from = 0 } = req.query;
+    const limit = 10;
+
+    try {
+        // Validate input
+        if (!mood) {
+            return res.status(400).json({ success: false, message: 'Mood is required' });
+        }
+
+        const users = await User.find({ mood }).select('_id');
+        if (users.length === 0) {
+            return res.status(404).json({ success: false, message: 'No users found with the specified mood' });
+        }
+
+        const userIds = users.map(user => user._id);
+
+        const posts = await UserPost.find({ user_id: { $in: userIds } })
+            .sort({ created_at: -1 }) 
+            .skip(parseInt(start_from)) 
+            .limit(limit);
+
+        res.status(200).json({ success: true, posts });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'Server error', error: err.message });
+    }
+};
