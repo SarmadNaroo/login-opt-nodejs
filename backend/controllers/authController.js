@@ -41,7 +41,12 @@ exports.login = async (req, res) => {
         });
         await loginInfo.save();
 
-        res.status(200).json({ success: true, email: user.email, token });
+        res.status(200).json({
+            success: true,
+            userId: user._id,
+            email: user.email,
+            token
+        });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Server error', error: err.message });
     }
