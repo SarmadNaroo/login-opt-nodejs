@@ -7,6 +7,7 @@ const loginInfoRoutes = require('./routes/loginInfoRoutes');
 const otpRoutes = require('./routes/otpRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const userRoutes = require('./routes/userRoutes');
+const userPostRoutes = require('./routes/userPostRoutes');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/logininfo', loginInfoRoutes);
 app.use('/api/otp', otpRoutes); 
 app.use('/api/notifications', notificationRoutes);
 app.use('/api', userRoutes);
+app.use('/api', userPostRoutes);
 
 // Connect to MongoDB
 mongoose.connect(config.mongoURI)
