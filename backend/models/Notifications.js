@@ -6,11 +6,6 @@ const notificationSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    notification_type: {
-        type: String,
-        enum: ['push', 'email', 'in-app', 'SMS'],
-        required: true
-    },
     title: {
         type: String,
         required: true
@@ -25,7 +20,7 @@ const notificationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'sent', 'failed', 'read'],
+        enum: ['pending', 'sent', 'read'],
         default: 'pending'
     },
     created_at: {
