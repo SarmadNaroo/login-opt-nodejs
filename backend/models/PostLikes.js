@@ -17,7 +17,6 @@ const postLikeSchema = new mongoose.Schema({
     }
 });
 
-// Adding a compound index to prevent duplicate likes on the same post by the same user
 postLikeSchema.index({ post_id: 1, user_id: 1 }, { unique: true });
 
 module.exports = mongoose.model('PostLike', postLikeSchema);

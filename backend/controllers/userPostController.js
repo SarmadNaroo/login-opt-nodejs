@@ -17,9 +17,20 @@ exports.createUserPost = async (req, res) => {
             mood_status
         });
 
-        await newPost.save();
+        const savedPost = await newPost.save();
 
-        res.status(201).json({ success: true, message: 'Post created successfully', post: newPost });
+        res.status(201).json({ 
+            success: true, 
+            message: 'Post created successfully', 
+            post: {
+                post_id: savedPost._id, 
+                user_id: savedPost.user_id,
+                content: savedPost.content,
+                media_url: savedPost.media_url,
+                mood_status: savedPost.mood_status,
+                created_at: savedPost.created_at
+            } 
+        });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Server error', error: err.message });
     }
